@@ -10,7 +10,9 @@ class HeritageSiteController extends Controller
     public function index()
     {
         $sites = HeritageSite::all();
-        return view('heritage-sites.index', compact('sites'));
+            $featuredSites = HeritageSite::where('is_featured', true)->take(3)->get();
+
+        return view('heritage-sites.index', compact('sites' , 'featuredSites'));
     }
 
     public function show($id)
@@ -18,7 +20,7 @@ class HeritageSiteController extends Controller
         $site = HeritageSite::findOrFail($id);
         return view('heritage-sites.show', compact('site'));
     }
-}
 
+}
 
 

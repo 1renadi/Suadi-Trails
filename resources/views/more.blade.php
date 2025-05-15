@@ -12,7 +12,7 @@
         <!-- About Heritage Section -->
         <div class="row mb-5">
             <div class="col-md-12 mb-40 offset-md-4 text-center">
-                <h2 class="mb-4" style="color: #355E3B; font-family: 'Amiri', serif;">عن التراث السعودي</h2>
+                <h2 class="mb-4" style="font-family: 'Amiri', serif; color: #5a3921">عن التراث السعودي</h2>
                 <p class="text-muted" style="font-family: 'Amiri', serif;">
                     التراث السعودي يعكس تاريخًا عريقًا يمتد لآلاف السنين، من الحضارات القديمة مثل ثمود إلى الإنجازات الحديثة. يضم المملكة مواقع تراثية عالمية مثل الدرعية، التي كانت عاصمة الدولة السعودية الأولى، ومدائن صالح، التي تروي قصص الحضارة النبطية. تعرف على هذه القصص واستكشف المزيد من الثقافة العربية الأصيلة.
                 </p>
@@ -21,7 +21,7 @@
 
         <!-- Latest News or Updates Section -->
         <div class="row mb-5">
-            <h2 class="text-center mb-4" style="color: #355E3B; font-family: 'Amiri', serif;">آخر الأخبار</h2>
+            <h2 class="text-center mb-4" style="font-family: 'Amiri', serif; color: #5a3921">آخر الأخبار</h2>
             <div class="col-12">
                 <div class="row">
                     <div class="col-md-4 mb-4">

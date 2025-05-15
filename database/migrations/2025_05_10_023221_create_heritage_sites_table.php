@@ -12,11 +12,14 @@ class CreateHeritageSitesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->foreignId('region_id')->constrained()->onDelete('cascade');
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
-            $table->string('image')->nullable();
+            $table->unsignedBigInteger('region_id')->nullable();
+            $table->string('image');
+            $table->text('details')->nullable();
+            $table->string('category')->nullable();
+            $table->json('additional_images')->nullable();
             $table->timestamps();
+
+            $table->foreign('region_id')->references('id')->on('regions')->onDelete('set null');
         });
     }
 

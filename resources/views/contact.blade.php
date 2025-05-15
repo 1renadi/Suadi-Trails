@@ -4,8 +4,8 @@
 
 @section('content')
     <div class="container">
-        <h1 class="text-center my-4">تواصل معنا</h1>
-        <p class="text-center">يمكنك التواصل معنا عبر البريد الإلكتروني: RenadYaser23@gmail.com</p>
+        <h1 class="text-center my-4" style="font-family: 'Amiri', serif; color: #355E3B" > تواصل معنا</h1>
+        <p class="text-center" style="font-family: 'Amiri', serif; color: #5a3921" >يمكنك التواصل معنا عبر البريد الإلكتروني: RenadYaser23@gmail.com</p>
         <form action="/contact" method="POST" class="mt-4">
             @csrf
             <div class="mb-3">
@@ -24,3 +24,7 @@
         </form>
     </div>
 @endsection
+
+
+
+5a3921

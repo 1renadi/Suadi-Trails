@@ -147,8 +147,7 @@ body {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body >
-    <!-- Toggle Button for Sidebar (on small screens) -->
-<button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
 
 
 <!-- Header -->
@@ -171,12 +170,12 @@ body {
                 role="tablist"
                 style="--bs-nav-link-color:rgb(31, 25, 25); 
                        --bs-nav-pills-link-active-color: #EEC373; 
-                       --bs-nav-pills-link-active-bg: #355E3B;">
+                       --bs-nav-pills-link-active-bg:rgb(46, 12, 16);">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active rounded-5" id="home-tab2" href="{{ route('home') }}" role="tab" aria-selected="true">الرئيسية</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link rounded-5" id="heritage-tab2" href="{{ route('sites.index') }}" role="tab" aria-selected="false">المواقع التراثية</a>
+                    <a class="nav-link rounded-5" id="heritage-tab2" href="{{route('heritage-sites.index') }}" role="tab" aria-selected="false">المواقع التراثية</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link rounded-5" id="contact-tab2" href="{{ route('contact') }}" role="tab" aria-selected="false">تواصل معنا</a>
