@@ -2,27 +2,29 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Suadi-Trails') - مآثر</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Suadi-Trails') - مآثر</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-        /* أنماط عامة */
         body {
             font-family: 'Amiri', serif;
-            background-color: rgb(251, 251, 236);
+            background-color: #FBFBE8;
             margin: 0;
             direction: rtl;
+            overflow-x: hidden;
         }
 
-        /* الهيدر */
         .header {
             background-color: #E9DAC1;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 10px 20px;
-            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .navbar-brand img {
@@ -35,7 +37,6 @@
             transform: scale(1.1);
         }
 
-        /* شريط التنقل */
         .nav-container {
             display: flex;
             align-items: center;
@@ -52,17 +53,18 @@
         }
 
         .nav-link {
-            color: var(--bs-nav-link-color) !important;
+            color: #1F1919 !important;
             font-size: 16px;
             border-radius: 5px;
             font-family: 'Amiri', serif;
             padding: 8px 12px;
             white-space: nowrap;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .nav-link.active {
-            color: var(--bs-nav-pills-link-active-color) !important;
-            background-color: var(--bs-nav-pills-link-active-bg) !important;
+            color: #EEC373 !important;
+            background-color: #2E0C10 !important;
         }
 
         .nav-link:hover {
@@ -70,48 +72,101 @@
             background-color: #355E3B;
         }
 
-        /* زر اللغة */
         .language-btn {
-            border: 1px solid rgb(0, 0, 0);
+            border: 1px solid #000000;
             border-radius: 5px;
             padding: 5px 10px;
             background-color: #F5F5DC;
-            color: rgb(0, 0, 0);
+            color: #000000;
             font-family: 'Amiri', serif;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .language-btn:hover {
-            background-color: rgb(0, 0, 0);
-            color: #EEC373;
+            background-color: #000000;
+            color: #FBFBE8;
         }
 
         /* الشريط الجانبي */
         .sidebar {
-            background-color: #f8f9fa;
+            background-color: #636347; /* تصحيح اللون إلى قيمة صحيحة بناءً على القصد (ربما كان يُقصد #636347 بدلاً من FBFBE8(99, 99, 71)) */
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-left: 20px;
+            box-shadow: 0 2px 5px rgba(27, 20, 20, 0.1);
             width: 250px;
-            float: right;
+            height: calc(100vh - 90px);
+            position: fixed;
+            top: 90px;
+            right: 0;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 999;
         }
 
-        /* المحتوى الرئيسي */
+        .sidebar.show {
+            transform: translateX(0);
+        }
+
+        .sidebar h4 {
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2D2424;
+        }
+
+        .sidebar .nav-link {
+            color: #2D2424;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #EEC373;
+            color: #355E3B;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #A19882;
+            color: #EEC373;
+        }
+
+        /* زر إظهار/إخفاء السايد بار */
+        .sidebar-toggle {
+            position: fixed;
+            top: 100px;
+            right: 10px;
+            background-color: #E9DAC1;
+            color: #2D2424;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
         .main-content {
-            margin-right: 270px;
+            margin-right: 0;
             padding: 20px;
+            transition: margin-right 0.3s ease;
         }
 
-        /* الفوتر */
+        .main-content.sidebar-open {
+            margin-right: 270px;
+        }
+
         footer {
             background-color: #E9DAC1;
             color: #2D2424;
             padding: 20px;
             text-align: center;
-            clear: both;
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
 
-        /* تصميم متجاوب */
         @media (max-width: 992px) {
             .nav {
                 display: none;
@@ -122,39 +177,56 @@
                 width: 200px;
                 z-index: 1000;
             }
-            
+
             .nav.show {
                 display: flex;
             }
-            
+
             .mobile-menu-btn {
                 display: block;
+                background: none;
+                border: none;
+                font-size: 24px;
+                color: #2D2424;
+                cursor: pointer;
             }
-            
+
             .navbar-brand img {
                 height: 50px;
             }
-            
+
             .nav-link {
                 padding: 10px;
                 text-align: center;
             }
-            
+
             .header {
                 padding: 10px;
+            }
+
+            .sidebar {
+                width: 200px;
+                height: calc(100vh - 80px);
+                top: 80px;
+            }
+
+            .main-content.sidebar-open {
+                margin-right: 220px;
             }
         }
 
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
-                float: none;
-                margin-left: 0;
-                margin-bottom: 20px;
+                max-width: 300px;
             }
-            
+
             .main-content {
-                margin-right: 0;
+                padding: 15px;
+            }
+
+            .main-content.sidebar-open {
+                margin-right: 300px;
             }
         }
 
@@ -162,14 +234,21 @@
             .navbar-brand img {
                 height: 40px;
             }
-            
+
             .language-btn {
                 padding: 3px 6px;
                 font-size: 14px;
             }
+
+            .sidebar {
+                max-width: 250px;
+            }
+
+            .main-content.sidebar-open {
+                margin-right: 250px;
+            }
         }
     </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
@@ -189,15 +268,12 @@
                 <!-- Nav Bar -->
                 <ul class="nav nav-pills nav-fill gap-2 p-1 rounded-4 shadow-sm" dir="rtl" 
                     id="pillNav2" 
-                    role="tablist"
-                    style="--bs-nav-link-color:rgb(31, 25, 25); 
-                           --bs-nav-pills-link-active-color: #EEC373; 
-                           --bs-nav-pills-link-active-bg:rgb(46, 12, 16);">
+                    role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active rounded-5" id="home-tab2" href="{{ route('home') }}" role="tab" aria-selected="true">الرئيسية</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link rounded-5" id="heritage-tab2" href="{{route('heritage-sites.index') }}" role="tab" aria-selected="false">المواقع التراثية</a>
+                        <a class="nav-link rounded-5" id="heritage-tab2" href="{{ route('heritage-sites.index') }}" role="tab" aria-selected="false">المواقع التراثية</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link rounded-5" id="contact-tab2" href="{{ route('contact') }}" role="tab" aria-selected="false">تواصل معنا</a>
@@ -218,27 +294,35 @@
         </div>
     </header>
 
+
+
     <!-- هيكل الصفحة الرئيسي -->
     <div class="container-fluid">
         <div class="row">
             <!-- الشريط الجانبي -->
-            <aside class="sidebar">
+            <aside class="sidebar" id="sidebar">
                 <h4>القائمة الجانبية</h4>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">رابط 1</a>
+                        <a class="nav-link" href="{{ route('home') }}">الرئيسية</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">رابط 2</a>
+                        <a class="nav-link" href="{{ route('heritage-sites.index') }}">المواقع التراثية</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">رابط 3</a>
+                        <a class="nav-link" href="{{ route('contact') }}">تواصل معنا</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('more') }}">المزيد</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">تسجيل الدخول</a>
                     </li>
                 </ul>
             </aside>
 
             <!-- المحتوى الرئيسي -->
-            <main class="main-content">
+            <main class="main-content" id="mainContent">
                 @yield('content')
             </main>
         </div>
@@ -256,12 +340,33 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- JavaScript for Mobile Menu -->
+
+    <!-- JavaScript for Mobile Menu and Sidebar -->
     <script>
+        // Mobile Menu Toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             document.querySelector('.nav').classList.toggle('show');
         });
+
+        // Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const mainContent = document.getElementById('mainContent');
+
+        if (sidebarToggle && sidebar && mainContent) {
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+                mainContent.classList.toggle('sidebar-open');
+            });
+
+            window.addEventListener('resize', function() {
+                if (sidebar.classList.contains('show')) {
+                    mainContent.classList.add('sidebar-open');
+                } else {
+                    mainContent.classList.remove('sidebar-open');
+                }
+            });
+        }
     </script>
 </body>
 </html>
