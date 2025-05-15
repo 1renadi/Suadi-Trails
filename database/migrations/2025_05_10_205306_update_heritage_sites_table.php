@@ -6,21 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
-    {
-        Schema::table('heritage_sites', function (Blueprint $table) {
-            // Check if columns exist before dropping
-            if (Schema::hasColumn('heritage_sites', 'latitude')) {
-                $table->dropColumn('latitude');
-            }
-            if (Schema::hasColumn('heritage_sites', 'longitude')) {
-                $table->dropColumn('longitude');
-            }
-            // Add details and additional_images columns
-            $table->text('details')->nullable()->after('description');
+public function up()
+{
+    Schema::table('heritage_sites', function (Blueprint $table) {
+        // إزالة الأعمدة إذا كانت موجودة (بأمان)
+        if (Schema::hasColumn('heritage_sites', 'latitude')) {
+            $table->dropColumn('latitude');
+        }
+        if (Schema::hasColumn('heritage_sites', 'longitude')) {
+            $table->dropColumn('longitude');
+        }
+        
+        // إضافة الأعمدة الجديدة فقط إذا لم تكن موجودة
+       
+        if (!Schema::hasColumn('heritage_sites', 'additional_images')) {
             $table->json('additional_images')->nullable()->after('image');
-        });
-    }
+        }
+    });
+}
 
     public function down()
     {
