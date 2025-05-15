@@ -9,21 +9,20 @@
     <title>@yield('title', 'Suadi-Trails') - مآثر</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
+        /* أنماط عامة */
         body {
             font-family: 'Amiri', serif;
             background-color: rgb(251, 251, 236);
             margin: 0;
-            transition: margin-right 0.3s;
             direction: rtl;
         }
 
+        /* الهيدر */
         .header {
             background-color: #E9DAC1;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 10px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            margin-bottom: 20px;
         }
 
         .navbar-brand img {
@@ -36,6 +35,7 @@
             transform: scale(1.1);
         }
 
+        /* شريط التنقل */
         .nav-container {
             display: flex;
             align-items: center;
@@ -70,6 +70,7 @@
             background-color: #355E3B;
         }
 
+        /* زر اللغة */
         .language-btn {
             border: 1px solid rgb(0, 0, 0);
             border-radius: 5px;
@@ -84,17 +85,33 @@
             color: #EEC373;
         }
 
-        /* زر القائمة للجوال */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #000;
-            cursor: pointer;
+        /* الشريط الجانبي */
+        .sidebar {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-left: 20px;
+            width: 250px;
+            float: right;
         }
 
-        /* تنسيقات للشاشات الصغيرة */
+        /* المحتوى الرئيسي */
+        .main-content {
+            margin-right: 270px;
+            padding: 20px;
+        }
+
+        /* الفوتر */
+        footer {
+            background-color: #E9DAC1;
+            color: #2D2424;
+            padding: 20px;
+            text-align: center;
+            clear: both;
+        }
+
+        /* تصميم متجاوب */
         @media (max-width: 992px) {
             .nav {
                 display: none;
@@ -125,6 +142,19 @@
             
             .header {
                 padding: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                float: none;
+                margin-left: 0;
+                margin-bottom: 20px;
+            }
+            
+            .main-content {
+                margin-right: 0;
             }
         }
 
@@ -188,9 +218,30 @@
         </div>
     </header>
 
-    <!-- Content -->
-    <div class="content" id="content">
-        @yield('content')
+    <!-- هيكل الصفحة الرئيسي -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- الشريط الجانبي -->
+            <aside class="sidebar">
+                <h4>القائمة الجانبية</h4>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">رابط 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">رابط 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">رابط 3</a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- المحتوى الرئيسي -->
+            <main class="main-content">
+                @yield('content')
+            </main>
+        </div>
     </div>
 
     <!-- Footer -->
