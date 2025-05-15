@@ -9,11 +9,15 @@ return new class extends Migration
     public function up()
     {
         Schema::table('heritage_sites', function (Blueprint $table) {
-            // إزالة الحقلين latitude و longitude
-            $table->dropColumn(['latitude', 'longitude']);
-            // إضافة حقل details (محتوى كامل)
+            // Check if columns exist before dropping
+            if (Schema::hasColumn('heritage_sites', 'latitude')) {
+                $table->dropColumn('latitude');
+            }
+            if (Schema::hasColumn('heritage_sites', 'longitude')) {
+                $table->dropColumn('longitude');
+            }
+            // Add details and additional_images columns
             $table->text('details')->nullable()->after('description');
-            // إضافة حقل additional_images (روابط صور إضافية)
             $table->json('additional_images')->nullable()->after('image');
         });
     }
@@ -21,8 +25,10 @@ return new class extends Migration
     public function down()
     {
         Schema::table('heritage_sites', function (Blueprint $table) {
+            // Restore latitude and longitude if they were dropped
             $table->float('latitude')->nullable();
             $table->float('longitude')->nullable();
+            // Drop the added columns
             $table->dropColumn(['details', 'additional_images']);
         });
     }
