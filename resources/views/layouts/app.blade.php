@@ -22,9 +22,13 @@
             background-color: #E9DAC1;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 10px 20px;
-            position: sticky;
+            position: fixed; 
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
+            border-bottom: 1px solid #ccc; 
+            border-radius: 0 0 15px 15px; 
         }
 
         .navbar-brand img {
@@ -44,12 +48,8 @@
             width: 100%;
         }
 
-        .nav {
+        .navbar-nav {
             gap: 10px;
-            background-color: #A19882;
-            padding: 5px 15px;
-            border-radius: 8px;
-            display: flex;
         }
 
         .nav-link {
@@ -72,24 +72,8 @@
             background-color: #355E3B;
         }
 
-        .language-btn {
-            border: 1px solid #000000;
-            border-radius: 5px;
-            padding: 5px 10px;
-            background-color: #F5F5DC;
-            color: #000000;
-            font-family: 'Amiri', serif;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .language-btn:hover {
-            background-color: #000000;
-            color: #FBFBE8;
-        }
-
-        /* الشريط الجانبي */
         .sidebar {
-            background-color: #636347; /* تصحيح اللون إلى قيمة صحيحة بناءً على القصد (ربما كان يُقصد #636347 بدلاً من FBFBE8(99, 99, 71)) */
+            background-color: #636347;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(27, 20, 20, 0.1);
@@ -133,7 +117,6 @@
             color: #EEC373;
         }
 
-        /* زر إظهار/إخفاء السايد بار */
         .sidebar-toggle {
             position: fixed;
             top: 100px;
@@ -150,6 +133,7 @@
         .main-content {
             margin-right: 0;
             padding: 20px;
+            margin-top: 80px; /* مسافة من الأعلى لتجنب التداخل مع الـ navbar العائم */
             transition: margin-right 0.3s ease;
         }
 
@@ -168,27 +152,19 @@
         }
 
         @media (max-width: 992px) {
-            .nav {
+            .navbar-nav {
                 display: none;
+            }
+
+            .navbar-nav.show {
+                display: flex;
+                flex-direction: column;
                 position: absolute;
                 top: 80px;
                 right: 20px;
-                flex-direction: column;
                 width: 200px;
+                background-color: #A19882;
                 z-index: 1000;
-            }
-
-            .nav.show {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-                background: none;
-                border: none;
-                font-size: 24px;
-                color: #2D2424;
-                cursor: pointer;
             }
 
             .navbar-brand img {
@@ -235,11 +211,6 @@
                 height: 40px;
             }
 
-            .language-btn {
-                padding: 3px 6px;
-                font-size: 14px;
-            }
-
             .sidebar {
                 max-width: 250px;
             }
@@ -260,41 +231,34 @@
                     <img src="{{ asset('images/logo.png') }}" alt="مآثر Logo" class="img-fluid">
                 </a>
 
-                <!-- زر القائمة للجوال -->
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
+                <!-- Navbar Toggler (Hamburger Menu) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pillNav2" aria-controls="pillNav2" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <!-- Nav Bar -->
-                <ul class="nav nav-pills nav-fill gap-2 p-1 rounded-4 shadow-sm" dir="rtl" 
-                    id="pillNav2" 
-                    role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active rounded-5" id="home-tab2" href="{{ route('home') }}" role="tab" aria-selected="true">الرئيسية</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link rounded-5" id="heritage-tab2" href="{{ route('heritage-sites.index') }}" role="tab" aria-selected="false">المواقع التراثية</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link rounded-5" id="contact-tab2" href="{{ route('contact') }}" role="tab" aria-selected="false">تواصل معنا</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link rounded-5" id="more-tab2" href="{{ route('more') }}" role="tab" aria-selected="false">المزيد</a>
-                    </li>
-                </ul>
-
-                <!-- Language Switch -->
-                <div class="d-flex align-items-center">
-                    <button class="btn language-btn">En</button>
-                    <div class="nav-item" role="presentation" dir="ltr">
-                        <a class="nav-link rounded-5" id="login-tab2" href="{{ route('login') }}" role="tab" aria-selected="false">تسجيل الدخول</a>
-                    </div>
+                <div class="collapse navbar-collapse" id="pillNav2">
+                    <ul class="navbar-nav nav-pills gap-2 p-1 rounded-4 shadow-sm" dir="rtl" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active rounded-5" id="home-tab2" href="{{ route('home') }}" role="tab" aria-selected="true">الرئيسية</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link rounded-5" id="heritage-tab2" href="{{ route('heritage-sites.index') }}" role="tab" aria-selected="false">المواقع التراثية</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link rounded-5" id="contact-tab2" href="{{ route('contact') }}" role="tab" aria-selected="false">تواصل معنا</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link rounded-5" id="more-tab2" href="{{ route('more') }}" role="tab" aria-selected="false">المزيد</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </header>
 
-
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
 
     <!-- هيكل الصفحة الرئيسي -->
     <div class="container-fluid">
@@ -341,14 +305,8 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript for Mobile Menu and Sidebar -->
+    <!-- JavaScript for Sidebar -->
     <script>
-        // Mobile Menu Toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            document.querySelector('.nav').classList.toggle('show');
-        });
-
-        // Sidebar Toggle
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const mainContent = document.getElementById('mainContent');

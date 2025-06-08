@@ -6,84 +6,73 @@
     <div class="container py-5">
         <h1 class="text-center mb-5" style="color: #355E3B; font-family: 'Amiri', serif;">المواقع التراثية</h1>
 
-        <!-- قائمة أنواع التراث بشكل خانات متجاورة -->
+        <!-- قائمة أنواع التراث بشكل متسلسل -->
         <section class="heritage-categories">
-            <div class="row row-cols-1 row-cols-md-2 g-4">
+            <ol class="list-group list-group-numbered">
                 <!-- التراث المادي -->
-                <div class="col">
-                    <a href="{{ route('heritage.material') }}" class="list-group-item list-group-item-action text-decoration-none">
+                <li class="list-group-item">
+                    <a href="{{ route('heritage.material') }}" class="text-decoration-none">
                         <div class="card h-100" style="background-color: #f1f8e9; border: 2px solid #A19882; font-family: 'Amiri', serif;">
                             <img src="{{ asset('images/material.jpg') }}" class="card-img-top" alt="التراث المادي" style="height: 200px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h4 class="mb-0" style="color: #355E3B;">1. التراث المادي (التاريخي والأثري)</h4>
+                                <h4 class="mb-0" style="color: #355E3B;">التراث المادي (التاريخي والأثري)</h4>
                                 <p class="text-muted">استكشف المواقع التاريخية مثل قصر المصمك ومدائن صالح.</p>
                             </div>
                         </div>
                     </a>
-                </div>
+                </li>
                 <!-- التراث غير المادي -->
-                <div class="col">
-                    <a href="{{ route('heritage.nonmaterial') }}" class="list-group-item list-group-item-action text-decoration-none">
+                <li class="list-group-item">
+                    <a href="{{ route('heritage.nonmaterial') }}" class="text-decoration-none">
                         <div class="card h-100" style="background-color: #f1f8e9; border: 2px solid #A19882; font-family: 'Amiri', serif;">
                             <img src="{{ asset('images/nonmaterial.jpg') }}" class="card-img-top" alt="التراث غير المادي" style="height: 200px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h4 class="mb-0" style="color: #355E3B;">2. التراث غير المادي (العادات والتقاليد)</h4>
+                                <h4 class="mb-0" style="color: #355E3B;">التراث غير المادي (العادات والتقاليد)</h4>
                                 <p class="text-muted">تعرف على العادات والتقاليد السعودية الأصيلة.</p>
                             </div>
                         </div>
                     </a>
-                </div>
+                </li>
                 <!-- التراث الديني -->
-                <div class="col">
-                    <a href="{{ route('heritage.religious') }}" class="list-group-item list-group-item-action text-decoration-none">
+                <li class="list-group-item">
+                    <a href="{{ route('heritage.religious') }}" class="text-decoration-none">
                         <div class="card h-100" style="background-color: #f1f8e9; border: 2px solid #A19882; font-family: 'Amiri', serif;">
                             <img src="{{ asset('images/religious.jpg') }}" class="card-img-top" alt="التراث الديني" style="height: 200px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h4 class="mb-0" style="color: #355E3B;">3. التراث الديني</h4>
+                                <h4 class="mb-0" style="color: #355E3B;">التراث الديني</h4>
                                 <p class="text-muted">اكتشف الإرث الديني المرتبط بالحرمين الشريفين.</p>
                             </div>
                         </div>
                     </a>
-                </div>
+                </li>
                 <!-- التراث الطبيعي -->
-                <div class="col">
-                    <a href="{{ route('heritage.natural') }}" class="list-group-item list-group-item-action text-decoration-none">
+                <li class="list-group-item">
+                    <a href="{{ route('heritage.natural') }}" class="text-decoration-none">
                         <div class="card h-100" style="background-color: #f1f8e9; border: 2px solid #A19882; font-family: 'Amiri', serif;">
                             <img src="{{ asset('images/natural.jpg') }}" class="card-img-top" alt="التراث الطبيعي" style="height: 200px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h4 class="mb-0" style="color: #355E3B;">4. التراث الطبيعي</h4>
+                                <h4 class="mb-0" style="color: #355E3B;">التراث الطبيعي</h4>
                                 <p class="text-muted">استمتع بالجمال الطبيعي للجبال والصحارى.</p>
                             </div>
                         </div>
                     </a>
-                </div>
-                <!-- التراث البحري -->
-                <div class="col">
-                    <a href="{{ route('heritage.maritime') }}" class="list-group-item list-group-item-action text-decoration-none">
-                        <div class="card h-100" style="background-color: #f1f8e9; border: 2px solid #A19882; font-family: 'Amiri', serif;">
-                            <img src="{{ asset('images/maritime.jpg') }}" class="card-img-top" alt="التراث البحري" style="height: 200px; object-fit: cover;">
-                            <div class="card-body text-center">
-                                <h4 class="mb-0" style="color: #355E3B;">6. التراث البحري</h4>
-                                <p class="text-muted">تعرف على التراث المرتبط بالبحر الأحمر والخليج.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                </li>
+          
                 <!-- الأزياء التقليدية -->
-                <div class="col">
-                    <a href="{{ route('heritage.clothing') }}" class="list-group-item list-group-item-action text-decoration-none">
+                <li class="list-group-item">
+                    <a href="{{ route('heritage.clothing') }}" class="text-decoration-none">
                         <div class="card h-100" style="background-color: #f1f8e9; border: 2px solid #A19882; font-family: 'Amiri', serif;">
                             <img src="{{ asset('images/clothing.jpg') }}" class="card-img-top" alt="الأزياء التقليدية" style="height: 200px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h4 class="mb-0" style="color: #355E3B;">7. الأزياء التقليدية</h4>
+                                <h4 class="mb-0" style="color: #355E3B;">الأزياء التقليدية</h4>
                                 <p class="text-muted">استعرض الأزياء التقليدية التي تعكس الهوية السعودية.</p>
                             </div>
                         </div>
                     </a>
-                </div>
+                </li>
                 <!-- الفلكلور والأهازيج -->
-                <div class="col">
-                    <a href="{{ route('heritage.folklore') }}" class="list-group-item list-group-item-action text-decoration-none">
+                <li class="list-group-item">
+                    <a href="{{ route('heritage.folklore') }}" class="text-decoration-none">
                         <div class="card h-100" style="background-color: #f1f8e9; border: 2px solid #A19882; font-family: 'Amiri', serif;">
                             <img src="{{ asset('images/folklore.jpg') }}" class="card-img-top" alt="الفلكلور والأهازيج" style="height: 200px; object-fit: cover;">
                             <div class="card-body text-center">
@@ -92,8 +81,8 @@
                             </div>
                         </div>
                     </a>
-                </div>
-            </div>
+                </li>
+            </ol>
         </section>
 
         <!-- قسم المواقع التراثية (اختياري) -->
@@ -133,6 +122,11 @@
         .btn-custom:hover {
             background-color: rgb(157, 125, 64) !important;
             color: rgb(43, 42, 40) !important;
+        }
+        .list-group-item {
+            background-color: transparent;
+            border: none;
+            padding: 10px 0;
         }
     </style>
 @endsection

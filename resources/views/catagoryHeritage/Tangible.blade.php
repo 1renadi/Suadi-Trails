@@ -2,9 +2,10 @@
 
 @section('content')
     <div class="container mt-5">
-<h1 class="text-center mb-4" style="font-family: 'Amiri', serif; color: #5a3921; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
-    التراث التاريخي والأثري
-</h1>        <div class="row">
+        <h1 class="text-center mb-4" style="font-family: 'Amiri', serif; color: #5a3921; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+            التراث التاريخي والأثري
+        </h1>
+        <div class="row">
             @php
                 $landmarks = [
                     ['id' => 1, 'name' => 'الدرعية', 'image' => 'images/diriyah.jpg', 'description' => 'الدرعية هي الموقع التاريخي لتأسيس الدولة السعودية الأولى، وتُعد من مواقع التراث العالمي لليونسكو.', 'view' => 'TangibleContent.Diriyah'],
@@ -20,60 +21,61 @@
             @endphp
 
             @if (!empty($landmarks))
-                @foreach ($landmarks as $landmark)
-                <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-4 d-flex">
-                    <div class="card heritage-card w-100 border-0 shadow-sm overflow-hidden" style="background-color:#f1f8e9; border: 1px solid #D2B48C !important;">
-                        <!-- صورة الموقع -->
-                        <div class="card-img-container ratio ratio-16x9">
-                            <img src="{{ asset($landmark['image']) }}" 
-                                 alt="{{ $landmark['name'] }}" 
-                                 class="card-img-top img-fluid zoom-effect">
-                        </div>
-                        
-                        <!-- محتوى الكارد -->
-                        <div class="card-body p-3 p-md-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-landmark me-2" style="color:rgb(71, 64, 44);"></i>
-                                <h5 class="card-title mb-0" style="font-family: 'Amiri', serif; color: #5a3921; font-weight: bold;">
-                                    {{ $landmark['name'] }}
-                                </h5>
+                <div class="list-group">
+                    @foreach ($landmarks as $landmark)
+                        <div class="list-group-item py-4 d-flex flex-column align-items-center">
+                            <div class="card heritage-card w-100 border-0 shadow-sm overflow-hidden" style="background-color: #f1f8e9; border: 1px solid #D2B48C !important;">
+                                <!-- صورة الموقع -->
+                                <div class="card-img-container ratio ratio-16x9">
+                                    <img src="{{ asset($landmark['image']) }}" 
+                                         alt="{{ $landmark['name'] }}" 
+                                         class="card-img-top img-fluid zoom-effect">
+                                </div>
+                                
+                                <!-- محتوى الكارد -->
+                                <div class="card-body p-3 p-md-4 text-center">
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+                                        <i class="fas fa-landmark me-2" style="color: rgb(71, 64, 44);"></i>
+                                        <h5 class="card-title mb-0" style="font-family: 'Amiri', serif; color: #5a3921; font-weight: bold;">
+                                            {{ $landmark['name'] }}
+                                        </h5>
+                                    </div>
+                                    
+                                    <p class="card-text" style="font-family: 'Tajawal', sans-serif; color: #2D2424;">
+                                        {{ Str::limit($landmark['description'], 100) }}
+                                    </p>
+                                </div>
+                                
+                                <!-- زر التفاصيل -->
+                                <div class="card-footer bg-transparent border-0 pt-0 pb-3 px-3 px-md-4 text-center">
+                                    <a href="{{ route('heritage.showDetail', $landmark['view']) }}" 
+                                       class="btn btn-custom btn-details px-3 px-md-4 py-2" style="font-family: 'Amiri', serif;">
+                                       استكشف الموقع
+                                    </a>
+                                </div>
                             </div>
-                            
-                            <p class="card-text" style="font-family: 'Tajawal', sans-serif; color: #2D2424;">
-                                {{ Str::limit($landmark['description'], 100) }}
-                            </p>
                         </div>
-                        
-                        <!-- زر التفاصيل -->
-                        <div class="card-footer bg-transparent border-0 pt-0 pb-3 px-3 px-md-4 text-center">
-                            <a href="{{ route('heritage.showDetail', $landmark['view']) }}" 
-                               class="btn btn-custom btn-details px-3 px-md-4 py-2" style="font-family: 'Amiri', serif;">
-                               
-                               استكشف الموقع
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-                @endforeach
             @else
                 <div class="col-12">
                     <p class="text-center py-5">لا توجد معالم تراثية مادية حاليًا.</p>
                 </div>
-
             @endif
-
+        </div>
     </div>
 @endsection
 
 @push('styles')
     <style>
         .body {
-    font-family: 'Amiri', serif;
-    background-color:rgb(251, 251, 236);
-    margin: 0;
-    transition: margin-right 0.3s;
-    direction: rtl;
-}
+            font-family: 'Amiri', serif;
+            background-color: rgb(251, 251, 236);
+            margin: 0;
+            transition: margin-right 0.3s;
+            direction: rtl;
+        }
+
         /* تأثيرات الكارد */
         .heritage-card {
             transition: all 0.3s ease;
@@ -103,7 +105,29 @@
             transform: scale(1.05);
         }
         
-    
+        /* تعديلات الزر */
+        .btn-custom {
+            background-color: #A19882 !important;
+            color: #2D2424 !important;
+            border: none !important;
+            border-radius: 25px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .btn-custom:hover {
+            background-color: #8B7D65 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* تنسيق القائمة المتسلسلة */
+        .list-group-item {
+            margin-bottom: 20px;
+            border: none;
+            background: transparent;
+        }
+
+        /* استجابة */
         @media (max-width: 767.98px) {
             .card-body {
                 padding: 1rem;
@@ -122,23 +146,5 @@
                 padding: 0.5rem 1rem !important;
             }
         }
-        
-        /* تعديلات الزر */
-        .btn-custom {
-            background-color: #A19882 !important;
-            color: #2D2424 !important;
-            border: none !important;
-            border-radius: 25px !important;
-            transition: all 0.3s ease !important;
-        }
-        
-        .btn-custom:hover {
-            background-color: #8B7D65 !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-
-  
     </style>
 @endpush
