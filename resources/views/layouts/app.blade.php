@@ -265,7 +265,6 @@
         <div class="row">
             <!-- الشريط الجانبي -->
             <aside class="sidebar" id="sidebar">
-                <h4>القائمة الجانبية</h4>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}">الرئيسية</a>
